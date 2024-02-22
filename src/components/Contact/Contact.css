@@ -1,0 +1,97 @@
+.contact-container {
+  background-color: #f5f2f0;
+  height: 50rem;
+}
+
+.contact-info {
+  text-align: center;
+}
+
+.contact-title {
+  padding-top: 4rem;
+}
+
+.contact-description {
+  margin: 3rem auto;
+  font-size: 1.5rem;
+}
+
+.contact-details {
+  display: flex;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-left: 10rem;
+}
+
+.input {
+  height: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid chocolate;
+}
+
+.area {
+  height: 8rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid chocolate;
+}
+
+.send-button {
+  align-self: center;
+  padding: 2rem 5rem;
+  border: 1px solid chocolate;
+  background-color: chocolate;
+  color: white;
+  font-weight: bold;
+}
+
+.send-button:hover {
+  cursor: pointer;
+}
+
+.contact-adresses {
+  display: flex;
+  justify-content: space-around; /* Dodałem justify-content, aby elementy były równomiernie rozłożone */
+  margin: 7rem auto; /* Ustawiam margines auto, aby centrować elementy w kontenerze */
+  width: 70%; /* Ustawiam szerokość kontenera na 70% */
+}
+
+.contact-data {
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* Centrujemy tekst wewnątrz elementów */
+}
+
+.contact-data-title {
+  font-weight: bold;
+}
+
+.phone {
+  display: flex;
+}
+
+.contact-sign {
+  height: 3rem;
+  color: chocolate;
+  transition: transform 0.3s ease;
+}
+
+.contact-sign:hover {
+  transform: translateY(-0.5rem);
+}
+
+.contact-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-details-sign {
+  height: 1.2rem;
+  margin-right: 1rem;
+}

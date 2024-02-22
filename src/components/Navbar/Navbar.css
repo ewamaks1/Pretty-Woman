@@ -1,0 +1,35 @@
+.navbar-page {
+  margin: 1rem;
+  padding: 0 2rem;
+  width: 100%;
+  display: flex;
+  font-family: Jost;
+  font-weight: 300;
+}
+
+.navbar-logo {
+  height: 120px;
+  width: 120px;
+  margin-right: 25%;
+  border-radius: 50%;
+}
+
+.navbar-logo:hover {
+  cursor: pointer;
+}
+
+.navbar-list {
+  text-transform: uppercase;
+}
+
+.navbar-list-item {
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 3rem 1rem 0rem auto;
+  text-decoration: none;
+}
+
+.navbar-list-item:hover {
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}

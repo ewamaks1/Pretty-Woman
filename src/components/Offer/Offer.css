@@ -1,0 +1,72 @@
+.offer-page {
+  background-color: #f5f2f0;
+}
+
+.offer-container {
+  display: flex;
+  justify-content: center;
+}
+
+.offer-title {
+  font-size: 5rem;
+  font-family: cursive;
+}
+
+.offer-navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.offer-btn {
+  margin: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  background-color: rgb(228, 228, 147);
+}
+
+.offer-btn:hover {
+  background-color: rgb(223, 186, 84);
+  cursor: pointer;
+}
+
+.offer-btn:active {
+  background-color: rgb(223, 186, 84);
+}
+
+.offer-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.single-offer {
+  background-color: white;
+  width: 20rem;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.offer-photo {
+  width: 19rem;
+  height: 12rem;
+  margin: 1rem;
+}
+
+.offer-details {
+  text-align: center;
+  padding: 1rem;
+}
+
+.offer-button {
+  background-color: black;
+  color: white;
+  padding: 1rem 3rem;
+}
+
+.offer-button:hover {
+  cursor: pointer;
+}

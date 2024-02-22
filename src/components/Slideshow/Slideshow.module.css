@@ -1,0 +1,47 @@
+.slideshow-container {
+  width: 100%;
+  height: 60rem;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+}
+
+.main-page-container {
+  padding: 5% 5% 8% 5%;
+  margin-top: 5%;
+  background-color: black;
+  color: white;
+  position: absolute;
+  opacity: 70%;
+  font-size: 1.5rem;
+}
+
+.main-page-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  margin-top: 5%;
+  padding: 3% 6%;
+  border: 5px solid rgb(166, 175, 123);
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(164, 182, 5);
+  font-size: 1.2rem;
+}
+
+.btn:active {
+  background-color: #3e8e41;
+  transform: translateY(4px);
+}
+
+.sign {
+  margin-left: 0.3rem;
+}
