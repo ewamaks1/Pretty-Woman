@@ -2,18 +2,19 @@
   background-color: #f5f2f0;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .reviews-container {
   background-color: ghostwhite;
   width: 95%;
-  padding-top: 10rem;
-  height: 30rem;
+  padding-top: 5rem;
+  height: 25rem;
   display: flex;
   justify-content: space-around;
   border: 1px solid chocolate;
-  margin: 2rem;
+  margin: 5rem 2rem;
+  box-shadow: 5px 2px 2px chocolate;
 }
 
 .reviews-entry {
@@ -28,7 +29,7 @@
 
 .slider-container {
   padding-top: 10rem;
-  width: 50%;
+  width: 55%;
 }
 
 .opinion {

@@ -11,38 +11,58 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Gallery: React.FC = () => {
+  const images: string[] = [
+    gallery1,
+    gallery2,
+    gallery3,
+    gallery4,
+    gallery5,
+    gallery6,
+  ];
   const settings = {
     dots: true,
-    className: "center",
-    centerMode: true,
+    arrows: true,
     infinite: true,
+    centerMode: false,
     centerPadding: "60px",
-    slidesToShow: 5,
     speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: false,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
-    <div className="slider-container">
-      <Slider {...settings}>
-        <div>
-          <img className="small-image" src={gallery1} alt="" />
-        </div>
-        <div>
-          <img className="small-image" src={gallery2} alt="" />
-        </div>
-        <div>
-          <img className="small-image" src={gallery3} alt="" />
-        </div>
-        <div>
-          <img className="small-image" src={gallery4} alt="" />
-        </div>
-        <div>
-          <img className="small-image" src={gallery5} alt="" />
-        </div>
-        <div>
-          <img className="small-image" src={gallery6} alt="" />
-        </div>
-      </Slider>
+    <div className="gallery-container">
+      <div className="slider-container">
+        <Slider {...settings}>
+          {images.map((image, index) => (
+            <div key={index} className="slide">
+              <img src={image} alt={`Slide ${index}`} className="image" />
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };
