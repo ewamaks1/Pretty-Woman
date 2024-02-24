@@ -7,9 +7,11 @@ import photo5 from "../../images/pmv-chamara-dMjkQJs58uo-unsplash.jpg";
 import photo6 from "../../images/rosa-rafael-Pe9IXUuC6QU-unsplash.jpg";
 import photo7 from "../../images/uby-yanes-hopBXVvcw6k-unsplash.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faPhone,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { URL_map } from "../Constants/Constants";
 import styles from "./Slideshow.module.css";
@@ -26,33 +28,28 @@ const photos: string[] = [
 
 const Slideshow: React.FC = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
-    photos.forEach((photo) => {
-      const img = new Image();
-      img.src = photo;
-    });
+    photos.forEach((photo) => (new Image().src = photo));
   }, []);
 
   const [backgroundImage, setBackgroundImage] = useState<string>(photos[0]);
 
   useEffect(() => {
     let currentIndex: number = 0;
-
     const changeBackgroundImage = () => {
       currentIndex = (currentIndex + 1) % photos.length;
       setBackgroundImage(photos[currentIndex]);
     };
 
     const interval = setInterval(changeBackgroundImage, 5000);
-
     return () => {
       clearInterval(interval);
     };
   }, [photos]);
 
   const openMapInNewWindow = () => {
-    const mapUrl: string = URL_map;
-    window.open(mapUrl, "_blank");
+    window.open(URL_map, "_blank");
   };
 
   return (

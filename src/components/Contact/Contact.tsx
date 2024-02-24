@@ -1,56 +1,63 @@
 import "./Contact.css";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faPersonChalkboard } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import {
+  faLocationDot,
+  faPhone,
+  faPhoneVolume,
+  faEnvelope,
+  faPersonChalkboard,
+} from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { FormData } from "../Interfaces/Interfaces";
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
+const Contact: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
+    errors: {},
   });
 
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: "" });
+    setFormData({
+      ...formData,
+      [name]: value,
+      errors: { ...formData.errors, [name]: "" },
+    });
   };
 
-  const validateForm = () => {
+  const validateForm = (): boolean => {
+    const { name, email, message } = formData;
+    const newErrors: { [key: string]: string } = {};
     let isValid = true;
-    const newErrors = {};
 
-    if (!formData.name.trim()) {
+    if (!name.trim()) {
       newErrors.name = "Pole Imię jest wymagane";
       isValid = false;
     }
 
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       newErrors.email = "Pole Email jest wymagane";
       isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "Nieprawidłowy format adresu email";
       isValid = false;
     }
 
-    if (!formData.message.trim()) {
+    if (!message.trim()) {
       newErrors.message = "Pole Wiadomość jest wymagane";
       isValid = false;
     }
 
-    setErrors(newErrors);
+    setFormData({ ...formData, errors: newErrors });
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
       console.log(formData);
@@ -58,6 +65,7 @@ const Contact = () => {
         name: "",
         email: "",
         message: "",
+        errors: {},
       });
     }
   };
@@ -83,7 +91,9 @@ const Contact = () => {
             onChange={handleChange}
             className="input"
           />
-          {errors.name && <div style={{ color: "red" }}>{errors.name}</div>}
+          {formData.errors.name && (
+            <div style={{ color: "red" }}>{formData.errors.name}</div>
+          )}
           <label>ADRES E-MAIL: </label>
           <input
             type="email"
@@ -92,7 +102,9 @@ const Contact = () => {
             onChange={handleChange}
             className="input"
           />
-          {errors.email && <div style={{ color: "red" }}>{errors.email}</div>}
+          {formData.errors.email && (
+            <div style={{ color: "red" }}>{formData.errors.email}</div>
+          )}
           <label>TREŚĆ: </label>
           <textarea
             name="message"
@@ -100,8 +112,8 @@ const Contact = () => {
             onChange={handleChange}
             className="area"
           />
-          {errors.message && (
-            <div style={{ color: "red" }}>{errors.message}</div>
+          {formData.errors.message && (
+            <div style={{ color: "red" }}>{formData.errors.message}</div>
           )}
           <button type="submit" className="send-button">
             WYŚLIJ

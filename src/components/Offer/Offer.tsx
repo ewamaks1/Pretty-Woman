@@ -1,6 +1,6 @@
 import "./Offer.css";
 import "typeface-courgette";
-import { useState } from "react";
+import React, { useState } from "react";
 import Face from "../Face/Face";
 import Hands from "../Hands/Hands";
 import Lashes from "../Lashes/Lashes";
@@ -8,12 +8,35 @@ import Epilation from "../Epilation/Epilation";
 import Tanned from "../Tanned/Tanned";
 import Cryotherapy from "../Cryotherapy/Cryotherapy";
 import Hair from "../Hair/Hair";
+import { FunctionComponent as FC } from "react";
 
-const Offer = () => {
-  const [category, setCategory] = useState("all");
+const Offer: React.FC = () => {
+  const [category, setCategory] = useState<string>("all");
 
-  const handleCategoryChange = (newCategory) => {
+  const handleCategoryChange = (newCategory: string) => {
     setCategory(newCategory);
+  };
+
+  const categoryLabels: Record<string, string> = {
+    all: "Wszystkie",
+    face: "Pielęgnacja twarzy",
+    hands: "Pielęgnacja dłoni",
+    lashes: "Stylizacja rzęs",
+    epilation: "Depilacja",
+    tanned: "Opalanie natryskowe",
+    cryotherapy: "Kriopoliza",
+    hair: "Usługi fryzjerskie",
+  };
+
+  const categoryComponents: Record<string, FC[]> = {
+    all: [Face, Hands, Lashes, Epilation, Tanned, Cryotherapy, Hair],
+    face: [Face],
+    hands: [Hands],
+    lashes: [Lashes],
+    epilation: [Epilation],
+    tanned: [Tanned],
+    cryotherapy: [Cryotherapy],
+    hair: [Hair],
   };
 
   return (
@@ -27,74 +50,20 @@ const Offer = () => {
         </h1>
       </div>
       <div className="offer-navbar">
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("all")}
-        >
-          Wszystkie
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("face")}
-        >
-          Pielęgnacja twarzy
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("hands")}
-        >
-          Pielęgnacja dłoni
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("lashes")}
-        >
-          Stylizacja rzęs
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("epilation")}
-        >
-          Depilacja
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("tanned")}
-        >
-          Opalanie natryskowe
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("cryotherapy")}
-        >
-          Kriopoliza
-        </button>
-        <button
-          className="offer-btn"
-          onClick={() => handleCategoryChange("hair")}
-        >
-          Usługi fryzjerskie
-        </button>
+        {Object.keys(categoryLabels).map((cat) => (
+          <button
+            key={cat}
+            className="offer-btn"
+            onClick={() => handleCategoryChange(cat)}
+          >
+            {categoryLabels[cat]}
+          </button>
+        ))}
       </div>
       <div className="offer-list">
-        {category === "all" && (
-          <>
-            <Face />
-            <Hands />
-            <Lashes />
-            <Epilation />
-            <Tanned />
-            <Cryotherapy />
-            <Hair />
-          </>
-        )}
-        {category === "face" && <Face />}
-        {category === "hands" && <Hands />}
-        {category === "lashes" && <Lashes />}
-        {category === "epilation" && <Epilation />}
-        {category === "tanned" && <Tanned />}
-        {category === "cryotherapy" && <Cryotherapy />}
-        {category === "hair" && <Hair />}
+        {categoryComponents[category].map((Component, index) => (
+          <Component key={index} />
+        ))}
       </div>
     </div>
   );

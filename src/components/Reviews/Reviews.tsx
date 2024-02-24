@@ -2,9 +2,11 @@ import "./Reviews.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import React from "react";
+import { SliderSettings } from "../Interfaces/Interfaces";
 
 const Reviews: React.FC = () => {
-  const settings = {
+  const settings: SliderSettings = {
     dots: true,
     className: "center",
     centerMode: true,

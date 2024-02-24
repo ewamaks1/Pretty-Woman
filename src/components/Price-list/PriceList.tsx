@@ -1,272 +1,112 @@
 import "./PriceList.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import { PriceData } from "../Interfaces/Interfaces";
 
-const PriceList = () => {
-  const [selectedPrice, setSelectedPrice] = useState("cosmetology");
+const priceData: PriceData = {
+  cosmetology: [
+    { name: "Manualne oczyszczanie twarzy", price: "220zł", time: "75min" },
+    {
+      name: "Manualne oczyszczanie twarzy + peeling kawitacyjny",
+      price: "250zł",
+      time: "90min",
+    },
+    { name: "Peeling kawitacyjny z sonoforezą", price: "200zł", time: "45min" },
+    { name: "Mikrodermabrazja diamentowa", price: "200zł", time: "45min" },
+    { name: "Mikrodermabrazja + oczyszczanie", price: "300zł", time: "75min" },
+  ],
+  manicure: [
+    { name: "Malowanie paznokci hybrydowe", price: "60zł", time: "30min" },
+    {
+      name: "Malowanie paznokci hybrydowe french",
+      price: "80zł",
+      time: "30min",
+    },
+    {
+      name: "Malowanie hybrydowe + opiłowanie paznokci",
+      price: "75zł",
+      time: "40min",
+    },
+    {
+      name: "Malowanie hybrydowe french + opiłowanie paznokci",
+      price: "95zł",
+      time: "40min",
+    },
+    {
+      name: "Manicure hybrydowy + wzorki",
+      price: "od 140 zł do 200 zł",
+      time: "90min",
+    },
+  ],
+  lashes: [
+    { name: "Przedłużanie rzęs metodą 1:1", price: "200zł", time: "150min" },
+    { name: "Przedłużanie rzęs metodą 2:1", price: "220zł", time: "150min" },
+    { name: "Przedłużanie rzęs metodą 3:1", price: "240zł", time: "150min" },
+    { name: "Przedłużanie rzęs metodą 4:1", price: "280zł", time: "150min" },
+    {
+      name: "Uzupełnienie rzęs metodą 1:1/2:1/3:1",
+      price: "od 50zł",
+      time: "30min",
+    },
+    { name: "Zdjęcie rzęs", price: "170 / 190 / 210 zł", time: "90min" },
+  ],
+  epilation: [
+    { name: "Górna warga", price: "150zł", time: "15min" },
+    { name: "Pachy", price: "200zł", time: "30min" },
+    { name: "Całe ręce", price: "300zł", time: "30min" },
+    { name: "Bikini", price: "300zł", time: "30min" },
+    { name: "Łydki", price: "250zł", time: "30min" },
+  ],
+  tanning: [
+    { name: "Opalanie natryskowe całe ciało", price: "135zł", time: "30min" },
+    { name: "Opalanie połowa ciała", price: "80zł", time: "20min" },
+    { name: "Opalanie twarz, szyja, dekolt", price: "60zł", time: "20min" },
+  ],
+  cryolipolysis: [
+    { name: "Podbródek", price: "500zł", time: "30min" },
+    { name: "Brzuch - 1 głowica", price: "650zł", time: "60min" },
+    { name: "Brzuch - 2 głowice", price: "1000zł", time: "60min" },
+    { name: "Boczki (dolna część pleców)", price: "1000zł", time: "60min" },
+    { name: "Uda - wewnętrzna część", price: "1000zł", time: "60min" },
+    { name: "Uda - zewnętrzna część", price: "1000zł", time: "60min" },
+  ],
+  hairdressing: [
+    { name: "Warkoczyki box braids", price: "600zł", time: "4h" },
+    { name: "Afroloki", price: "750zł", time: "5h" },
+    { name: "Afrofale", price: "850zł", time: "5h" },
+  ],
+};
 
-  const handleSelectPrice = (price) => {
+const PriceList: React.FC = () => {
+  const [selectedPrice, setSelectedPrice] = useState<string>("cosmetology");
+
+  const handleSelectPrice = (price: string) => {
     setSelectedPrice(price);
   };
   return (
     <div className="price-list-container">
       <div className="price-list">
-        <button
-          className={`btn ${selectedPrice === "cosmetology" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("cosmetology")}
-        >
-          Cennik kosmetyka twarzy
-        </button>
-        <button
-          className={`btn ${selectedPrice === "manicure" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("manicure")}
-        >
-          Cennik manicure hybrydowy
-        </button>
-        <button
-          className={`btn ${selectedPrice === "lashes" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("lashes")}
-        >
-          Cennik stylizacja rzęs
-        </button>
-        <button
-          className={`btn ${selectedPrice === "epilation" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("epilation")}
-        >
-          Cennik depilacja laserowa
-        </button>
-        <button
-          className={`btn ${selectedPrice === "tanning" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("tanning")}
-        >
-          Cennik opalanie natryskowe
-        </button>
-        <button
-          className={`btn ${selectedPrice === "cryolipolysis" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("cryolipolysis")}
-        >
-          Cennik kriopoliza
-        </button>
-        <button
-          className={`btn ${selectedPrice === "hairdressing" ? "active" : ""}`}
-          onClick={() => handleSelectPrice("hairdressing")}
-        >
-          Cennik fryzjerstwo
-        </button>
+        {Object.keys(priceData).map((priceType) => (
+          <button
+            key={priceType}
+            className={`btn ${selectedPrice === priceType ? "active" : ""}`}
+            onClick={() => handleSelectPrice(priceType)}
+          >
+            {`Cennik ${priceType}`}
+          </button>
+        ))}
       </div>
       <div className="price-details">
         {selectedPrice && (
-          <>
-            {selectedPrice === "cosmetology" && (
-              <div className="selected-price">
-                <h1 className="price-title">KOSMETYKA</h1>
-                <div className="price-description">
-                  <div className="name">Manualne oczyszczanie twarzy</div>
-                  <div className="price">220zł</div>
-                  <div className="time">75min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">
-                    Manualne oczyszczanie twarzy + peeling kawitacyjny
-                  </div>
-                  <div className="price">250zł</div>
-                  <div className="time">90min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Peeling kawitacyjny z sonoforezą</div>
-                  <div className="price">200zł</div>
-                  <div className="time">45min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Mikrodermabrazja diamentowa</div>
-                  <div className="price">200zł</div>
-                  <div className="time">45min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Mikrodermabrazja + oczyszczanie</div>
-                  <div className="price">300zł</div>
-                  <div className="time">75min</div>
-                </div>
+          <div className="selected-price">
+            <h1 className="price-title">{selectedPrice.toUpperCase()}</h1>
+            {priceData[selectedPrice].map((item, index) => (
+              <div className="price-description" key={index}>
+                <div className="name">{item.name}</div>
+                <div className="price">{item.price}</div>
+                <div className="time">{item.time}</div>
               </div>
-            )}
-            {selectedPrice === "manicure" && (
-              <div className="selected-price">
-                <h1 className="price-title">MANICURE HYBRYDOWY</h1>
-                <div className="price-description">
-                  <div className="name">Malowanie paznokci hybrydowe</div>
-                  <div className="price">60zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">
-                    Malowanie paznokci hybrydowe french
-                  </div>
-                  <div className="price">80zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">
-                    Malowanie hybrydowe + opiłowanie paznokci
-                  </div>
-                  <div className="price">75zł</div>
-                  <div className="time">40min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">
-                    Malowanie hybrydowe french + opiłowanie paznokci
-                  </div>
-                  <div className="price">95zł</div>
-                  <div className="time">40min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Manicure hybrydowy + wzorki</div>
-                  <div className="price">od 140 zł do 200 zł</div>
-                  <div className="time">90min</div>
-                </div>
-              </div>
-            )}
-            {selectedPrice === "lashes" && (
-              <div className="selected-price">
-                <h1 className="price-title">STYLIZACJA RZĘS</h1>
-                <div className="price-description">
-                  <div className="name">Przedłużanie rzęs metodą 1:1</div>
-                  <div className="price">200zł</div>
-                  <div className="time">150min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Przedłużanie rzęs metodą 2:1</div>
-                  <div className="price">220zł</div>
-                  <div className="time">150min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Przedłużanie rzęs metodą 3:1</div>
-                  <div className="price">240zł</div>
-                  <div className="time">150min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Przedłużanie rzęs metodą 4:1</div>
-                  <div className="price">280zł</div>
-                  <div className="time">150min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">
-                    Uzupełnienie rzęs metodą 1:1/2:1/3:1
-                  </div>
-                  <div className="price">od 50zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Zdjęcie rzęs</div>
-                  <div className="price">170 / 190 / 210 zł</div>
-                  <div className="time">90min</div>
-                </div>
-              </div>
-            )}
-            {selectedPrice === "epilation" && (
-              <div className="selected-price">
-                <h1 className="price-title">DEPILACJA LASEROWA</h1>
-                <div className="price-description">
-                  <div className="name">Górna warga</div>
-                  <div className="price">150zł</div>
-                  <div className="time">15min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Pachy</div>
-                  <div className="price">200zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Całe ręce</div>
-                  <div className="price">300zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Bikini</div>
-                  <div className="price">300zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Łydki</div>
-                  <div className="price">250zł</div>
-                  <div className="time">30min</div>
-                </div>
-              </div>
-            )}
-            {selectedPrice === "tanning" && (
-              <div className="selected-price">
-                <h1 className="price-title">OPALANIE NATRYSKOWE</h1>
-                <div className="price-description">
-                  <div className="name">Opalanie natryskowe całe ciało</div>
-                  <div className="price">135zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Opalanie połowa ciała</div>
-                  <div className="price">80zł</div>
-                  <div className="time">20min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Opalanie twarz, szyja, dekolt</div>
-                  <div className="price">60zł</div>
-                  <div className="time">20min</div>
-                </div>
-              </div>
-            )}
-            {selectedPrice === "cryolipolysis" && (
-              <div className="selected-price">
-                <h1 className="price-title">KRIOPOLIZA</h1>
-                <div className="price-description">
-                  <div className="name">Podbródek</div>
-                  <div className="price">500zł</div>
-                  <div className="time">30min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Brzuch - 1 głowica</div>
-                  <div className="price">650zł</div>
-                  <div className="time">60min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Brzuch - 2 głowice</div>
-                  <div className="price">1000zł</div>
-                  <div className="time">60min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Boczki (dolna część pleców)</div>
-                  <div className="price">1000zł</div>
-                  <div className="time">60min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Uda - wewnętrzna część</div>
-                  <div className="price">1000zł</div>
-                  <div className="time">60min</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Uda - zewnętrzna część</div>
-                  <div className="price">1000zł</div>
-                  <div className="time">60min</div>
-                </div>
-              </div>
-            )}
-            {selectedPrice === "hairdressing" && (
-              <div className="selected-price">
-                <h1 className="price-title">FRYZJERSTWO</h1>
-                <div className="price-description">
-                  <div className="name">Warkoczyki box braids</div>
-                  <div className="price">600zł</div>
-                  <div className="time">4h</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Afroloki</div>
-                  <div className="price">750zł</div>
-                  <div className="time">5h</div>
-                </div>
-                <div className="price-description">
-                  <div className="name">Afrofale</div>
-                  <div className="price">850zł</div>
-                  <div className="time">5h</div>
-                </div>
-              </div>
-            )}
-          </>
+            ))}
+          </div>
         )}
       </div>
     </div>

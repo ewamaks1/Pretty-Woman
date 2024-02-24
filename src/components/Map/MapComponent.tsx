@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { defaultCenter } from "../Constants/Constants";
-import { API_KEY } from "../Constants/Constants";
+import { defaultCenter, API_KEY } from "../Constants/Constants";
 
 const MapComponent: React.FC = () => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
